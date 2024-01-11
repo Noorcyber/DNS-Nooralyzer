@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Function to perform DNS lookup
+dns_lookup() {
+    read -p "Enter the domain name to look up: " domain
+    echo "Performing DNS lookup for $domain..."
+    nslookup "$domain"
+}
+
+# Function to perform reverse DNS lookup
+reverse_dns_lookup() {
+    read -p "Enter the IP address for reverse DNS lookup: " ip_address
+    echo "Performing reverse DNS lookup for $ip_address..."
+    nslookup "$ip_address"
+}
+
+# Function to display the DNS Management Tool menu
+display_menu() {
+    cat << "EOF"
+▓█████▄  ███▄    █   ██████     ███▄    █  ▒█████   ▒█████   ██▀███   ▄▄▄       ██▓   ▓██   ██▓▒███████▒▓█████  ██▀███  
+▒██▀ ██▌ ██ ▀█   █ ▒██    ▒     ██ ▀█   █ ▒██▒  ██▒▒██▒  ██▒▓██ ▒ ██▒▒████▄    ▓██▒    ▒██  ██▒▒ ▒ ▒ ▄▀░▓█   ▀ ▓██ ▒ ██▒
+░██   █▌▓██  ▀█ ██▒░ ▓██▄      ▓██  ▀█ ██▒▒██░  ██▒▒██░  ██▒▓██ ░▄█ ▒▒██  ▀█▄  ▒██░     ▒██ ██░░ ▒ ▄▀▒░ ▒███   ▓██ ░▄█ ▒
+░▓█▄   ▌▓██▒  ▐▌██▒  ▒   ██▒   ▓██▒  ▐▌██▒▒██   ██░▒██   ██░▒██▀▀█▄  ░██▄▄▄▄██ ▒██░     ░ ▐██▓░  ▄▀▒   ░▒▓█  ▄ ▒██▀▀█▄  
+░▒████▓ ▒██░   ▓██░▒██████▒▒   ▒██░   ▓██░░ ████▓▒░░ ████▓▒░░██▓ ▒██▒ ▓█   ▓██▒░██████▒ ░ ██▒▓░▒███████▒░▒████▒░██▓ ▒██▒
+ ▒▒▓  ▒ ░ ▒░   ▒ ▒ ▒ ▒▓▒ ▒ ░   ░ ▒░   ▒ ▒ ░ ▒░▒░▒░ ░ ▒░▒░▒░ ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▒░▓  ░  ██▒▒▒ ░▒▒ ▓░▒░▒░░ ▒░ ░░ ▒▓ ░▒▓░
+ ░ ▒  ▒ ░ ░░   ░ ▒░░ ░▒  ░ ░   ░ ░░   ░ ▒░  ░ ▒ ▒░   ░ ▒ ▒░   ░▒ ░ ▒░  ▒   ▒▒ ░░ ░ ▒  ░▓██ ░▒░ ░░▒ ▒ ░ ▒ ░ ░  ░  ░▒ ░ ▒░
+ ░ ░  ░    ░   ░ ░ ░  ░  ░        ░   ░ ░ ░ ░ ░ ▒  ░ ░ ░ ▒    ░░   ░   ░   ▒     ░ ░   ▒ ▒ ░░  ░ ░ ░ ░ ░   ░     ░░   ░ 
+By Noor Shaheed, Datto, Kaseya. 01/10/2024
+           DNS Management Tool - Nooralyzer
+------------------------------------------------------------
+1. Perform DNS Lookup
+2. Perform Reverse DNS Lookup
+3. Exit
+------------------------------------------------------------
+EOF
+}
+
+# Main function
+main() {
+    while true; do
+        clear
+        display_menu
+
+        read -p "Please select an option (1-3): " choice
+
+        case $choice in
+            1) dns_lookup ;;
+            2) reverse_dns_lookup ;;
+            3) echo "Exiting DNS Management Tool. Goodbye!"; exit ;;
+            *) echo "Invalid option. Please enter a number between 1 and 3." ;;
+        esac
+
+        read -p "Press Enter to continue..."
+    done
+}
+
+# Call the main function
+main
