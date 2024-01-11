@@ -2,40 +2,45 @@
 
 # Function to perform DNS lookup
 dns_lookup() {
-    echo "DNS Lookup:"
     read -p "Enter the domain name to look up: " domain
     echo "Performing DNS lookup for $domain..."
     nslookup "$domain"
+    press_enter
 }
 
 # Function to perform reverse DNS lookup
 reverse_dns_lookup() {
-    echo "Reverse DNS Lookup:"
     read -p "Enter the IP address for reverse DNS lookup: " ip_address
     echo "Performing reverse DNS lookup for $ip_address..."
     nslookup "$ip_address"
+    press_enter
 }
 
 # Function to display the DNS Management Tool menu
 display_menu() {
+    clear
     cat << "EOF"
-  _______ _        _______ _______ _______ _______ _______ 
- |__   __| |      |  ____ |______ |  ____ |______ |______
-    | |  | |______ |_____| |______ |_____| |______ ______|
-                                                            
-           DNS Management Tool - Netrunners
-------------------------------------------------------------
+ _______ _        _______ _______ _______ _______ _______ 
+|__   __| |      |  ____ |______ |  ____ |______ |______
+   | |  | |______ |_____| |______ |_____| |______ ______|
+                                                           
+          DNS Management Tool - Netrunners
+-----------------------------------------------------------
 1. Perform DNS Lookup
 2. Perform Reverse DNS Lookup
 3. Exit
-------------------------------------------------------------
+-----------------------------------------------------------
 EOF
+}
+
+# Function to prompt user to press Enter to continue
+press_enter() {
+    read -p "Press Enter to continue..."
 }
 
 # Main function
 main() {
     while true; do
-        clear
         display_menu
 
         echo "Enter the corresponding number or 'exit' to exit:"
@@ -44,12 +49,9 @@ main() {
         case $choice in
             1) dns_lookup ;;
             2) reverse_dns_lookup ;;
-            "exit") echo "Exiting DNS Management Tool. Goodbye!"; exit ;;
-            *) echo "Invalid option. Please enter '1', '2', or 'exit'." ;;
+            3|exit) echo "Exiting DNS Management Tool. Goodbye!"; exit ;;
+            *) echo "Invalid option. Please enter '1', '2', or 'exit'." ; press_enter ;;
         esac
-
-        echo "Press Enter to continue..."
-        read enter_key
     done
 }
 
